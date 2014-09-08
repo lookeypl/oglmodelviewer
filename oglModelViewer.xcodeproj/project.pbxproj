@@ -18,6 +18,8 @@
 		B232EB2719561C720047D54F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B232EB0619561C720047D54F /* Cocoa.framework */; };
 		B232EB2F19561C720047D54F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B232EB2D19561C720047D54F /* InfoPlist.strings */; };
 		B232EB3119561C720047D54F /* oglModelViewerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B232EB3019561C720047D54F /* oglModelViewerTests.m */; };
+		B28ABC761956BC6700D67075 /* oglMVOpenGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = B28ABC751956BC6700D67075 /* oglMVOpenGLView.m */; };
+		B2F83A1819B4F60B001CF4D2 /* oglMVCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F83A1719B4F60B001CF4D2 /* oglMVCamera.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +52,10 @@
 		B232EB2C19561C720047D54F /* oglModelViewerTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "oglModelViewerTests-Info.plist"; sourceTree = "<group>"; };
 		B232EB2E19561C720047D54F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		B232EB3019561C720047D54F /* oglModelViewerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = oglModelViewerTests.m; sourceTree = "<group>"; };
+		B28ABC741956BC6700D67075 /* oglMVOpenGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = oglMVOpenGLView.h; sourceTree = "<group>"; };
+		B28ABC751956BC6700D67075 /* oglMVOpenGLView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = oglMVOpenGLView.m; sourceTree = "<group>"; };
+		B2F83A1619B4F60B001CF4D2 /* oglMVCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = oglMVCamera.h; sourceTree = "<group>"; };
+		B2F83A1719B4F60B001CF4D2 /* oglMVCamera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = oglMVCamera.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +82,10 @@
 		B232EAFA19561C720047D54F = {
 			isa = PBXGroup;
 			children = (
+				B2F83A1619B4F60B001CF4D2 /* oglMVCamera.h */,
+				B2F83A1719B4F60B001CF4D2 /* oglMVCamera.m */,
+				B28ABC741956BC6700D67075 /* oglMVOpenGLView.h */,
+				B28ABC751956BC6700D67075 /* oglMVOpenGLView.m */,
 				B232EB0C19561C720047D54F /* oglModelViewer */,
 				B232EB2A19561C720047D54F /* oglModelViewerTests */,
 				B232EB0519561C720047D54F /* Frameworks */,
@@ -255,6 +265,8 @@
 			files = (
 				B232EB1A19561C720047D54F /* oglMVAppDelegate.m in Sources */,
 				B232EB1319561C720047D54F /* main.m in Sources */,
+				B2F83A1819B4F60B001CF4D2 /* oglMVCamera.m in Sources */,
+				B28ABC761956BC6700D67075 /* oglMVOpenGLView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -467,6 +479,7 @@
 				B232EB3619561C720047D54F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B232EB3719561C720047D54F /* Build configuration list for PBXNativeTarget "oglModelViewerTests" */ = {
 			isa = XCConfigurationList;
@@ -475,6 +488,7 @@
 				B232EB3919561C720047D54F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

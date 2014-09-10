@@ -17,6 +17,8 @@
     mCamera = [[oglMVCamera alloc] init];
     NSLog(@"oglMVOpenGLView::init: camera: %p", mCamera);
     mProjectionMatrix = GLKMatrix4MakePerspective(45.0f, 1.0f, 0.1f, 1000.0f);
+    for(int i=0; i<3; ++i)
+        mBackgroundColor[i] = 0.0f;
 }
 
 - (void)mouseDragged:(NSEvent*) event
@@ -27,7 +29,7 @@
 
 - (void)drawRect:(NSRect) bounds
 {
-    glClearColor(0.0, 0.0, 0.0, 0.0);
+    glClearColor(mBackgroundColor[0], mBackgroundColor[1], mBackgroundColor[2], 0.0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     glColor3f(1.0f, 0.85f, 0.35f);
@@ -49,6 +51,21 @@
     glEnd();
 
     glFlush();
+}
+
+-(void)setBackgroundColorRed:(float) red
+{
+    mBackgroundColor[0] = red;
+}
+
+-(void)setBackgroundColorGreen:(float) green
+{
+    mBackgroundColor[1] = green;
+}
+
+-(void)setBackgroundColorBlue:(float) blue
+{
+    mBackgroundColor[2] = blue;
 }
 
 @end

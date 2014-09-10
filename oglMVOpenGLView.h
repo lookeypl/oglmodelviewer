@@ -15,8 +15,12 @@
 @private
     oglMVCamera* mCamera;
     GLKMatrix4 mProjectionMatrix;
+    float mBackgroundColor[3];
 }
 
-- (void)drawRect:(NSRect) bounds;
+-(void)setBackgroundColorRed:(float) red;
+-(void)setBackgroundColorGreen:(float) green;
+-(void)setBackgroundColorBlue:(float) blue;
+-(void)drawRect:(NSRect) bounds;
 
 @end

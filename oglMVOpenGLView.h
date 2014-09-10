@@ -7,13 +7,14 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "oglMVCamera.h"
 #include <OpenGL/gl.h>
 
 @interface oglMVOpenGLView : NSOpenGLView
 {
 @private
-    float rotationX;
-    float rotationY;
+    oglMVCamera* mCamera;
+    GLKMatrix4 mProjectionMatrix;
 }
 
 - (void)drawRect:(NSRect) bounds;

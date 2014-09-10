@@ -16,9 +16,19 @@
     GLKVector4 mUp;
 
     GLKMatrix4 mViewMatrix;
+
+    float mSensitivity;
+    float mScrollSensitivity;
+    bool mExponentialZoom;
 }
 
 -(void)update:(float) deltaX and: (float) deltaY;
+-(void)updateZoom:(float) delta;
+
+-(void)setSensitivity:(float) sensitivity;
+-(void)setScrollSensitivity:(float) sensitivity;
+-(void)setExponentialZoom:(bool) enabled;
+
 -(GLKVector4)getPos;
 -(GLKVector4)getDir;
 -(GLKVector4)getUp;

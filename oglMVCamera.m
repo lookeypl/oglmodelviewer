@@ -27,6 +27,8 @@
                                        mDir.v[0], mDir.v[1], mDir.v[2],
                                        mUp.v[0], mUp.v[1], mUp.v[2]);
 
+    mExponentialZoom = true;
+
     return self;
 }
 
@@ -45,8 +47,8 @@
     GLKVector4 upNorm = GLKVector4CrossProduct(forwardNorm, sideNorm);
 
     // calculate new position of camera
-    mPos = GLKVector4Add(mPos, GLKVector4MultiplyScalar(sideNorm, deltaX * 0.05f));
-    mPos = GLKVector4Add(mPos, GLKVector4MultiplyScalar(upNorm, deltaY * 0.05f));
+    mPos = GLKVector4Add(mPos, GLKVector4MultiplyScalar(sideNorm, deltaX * mSensitivity));
+    mPos = GLKVector4Add(mPos, GLKVector4MultiplyScalar(upNorm, deltaY * mSensitivity));
 
     // recalculate "forward" support vector
     GLKVector4 forward = GLKVector4Subtract(mDir, mPos);
@@ -58,6 +60,43 @@
     mViewMatrix = GLKMatrix4MakeLookAt(mPos.v[0], mPos.v[1], mPos.v[2],
                                        mDir.v[0], mDir.v[1], mDir.v[2],
                                        mUp.v[0], mUp.v[1], mUp.v[2]);
+}
+
+-(void)updateZoom:(float) delta
+{
+    // get normalized forward vector
+    GLKVector4 forward = GLKVector4Subtract(mDir, mPos);
+    GLKVector4 forwardNorm = GLKVector4Normalize(forward);
+
+    // calculate zooming factor
+    float factor;
+    if (mExponentialZoom)
+        factor = delta * mScrollSensitivity * GLKVector4Length(forward);
+    else
+        factor = delta * mScrollSensitivity;
+
+    // update camera position
+    if (mExponentialZoom || GLKVector4Length(mPos) > factor)
+        mPos = GLKVector4Add(mPos, GLKVector4MultiplyScalar(forwardNorm, factor));
+
+    mViewMatrix = GLKMatrix4MakeLookAt(mPos.v[0], mPos.v[1], mPos.v[2],
+                                       mDir.v[0], mDir.v[1], mDir.v[2],
+                                       mUp.v[0], mUp.v[1], mUp.v[2]);
+}
+
+-(void)setSensitivity:(float)sensitivity
+{
+    mSensitivity = sensitivity;
+}
+
+-(void)setScrollSensitivity:(float)sensitivity
+{
+    mScrollSensitivity = sensitivity;
+}
+
+-(void)setExponentialZoom:(bool) enabled
+{
+    mExponentialZoom = enabled;
 }
 
 -(GLKVector4)getPos

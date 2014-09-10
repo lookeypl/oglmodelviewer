@@ -10,24 +10,31 @@
 
 @implementation oglMVOpenGLView
 
+// overloaded methods
 -(void)awakeFromNib
 {
     [super awakeFromNib];
+    [[self superview] setAutoresizingMask: NSViewWidthSizable];
 
     mCamera = [[oglMVCamera alloc] init];
     NSLog(@"oglMVOpenGLView::init: camera: %p", mCamera);
-    mProjectionMatrix = GLKMatrix4MakePerspective(45.0f, 1.0f, 0.1f, 1000.0f);
     for(int i=0; i<3; ++i)
         mBackgroundColor[i] = 0.0f;
 }
 
-- (void)mouseDragged:(NSEvent*) event
+-(void)mouseDragged:(NSEvent*) event
 {
     [mCamera update: event.deltaX and: event.deltaY];
     [self setNeedsDisplay: true];
 }
 
-- (void)drawRect:(NSRect) bounds
+-(void)scrollWheel:(NSEvent*) event
+{
+    [mCamera updateZoom: event.deltaY];
+    [self setNeedsDisplay: true];
+}
+
+-(void)drawRect:(NSRect) bounds
 {
     glClearColor(mBackgroundColor[0], mBackgroundColor[1], mBackgroundColor[2], 0.0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -53,6 +60,16 @@
     glFlush();
 }
 
+-(void)reshape
+{
+    NSSize viewSize = self.window.frame.size;
+    mWindowWidth = viewSize.width;
+    mWindowHeight = viewSize.height;
+
+    mProjectionMatrix = GLKMatrix4MakePerspective(45.0f, mWindowWidth/mWindowHeight, 0.1f, 1000.0f);
+}
+
+// additional externally visible methods
 -(void)setBackgroundColorRed:(float) red
 {
     mBackgroundColor[0] = red;
@@ -66,6 +83,21 @@
 -(void)setBackgroundColorBlue:(float) blue
 {
     mBackgroundColor[2] = blue;
+}
+
+-(void)setSensitivity:(float) sensitivity
+{
+    [self->mCamera setSensitivity: sensitivity];
+}
+
+-(void)setScrollSensitivity:(float) sensitivity
+{
+    [self->mCamera setScrollSensitivity: sensitivity];
+}
+
+-(void)setExponentialZoom:(bool) enabled
+{
+    [self->mCamera setExponentialZoom: enabled];
 }
 
 @end

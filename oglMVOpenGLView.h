@@ -13,6 +13,8 @@
 @interface oglMVOpenGLView : NSOpenGLView
 {
 @private
+    float mWindowWidth, mWindowHeight;
+
     oglMVCamera* mCamera;
     GLKMatrix4 mProjectionMatrix;
     float mBackgroundColor[3];
@@ -21,6 +23,8 @@
 -(void)setBackgroundColorRed:(float) red;
 -(void)setBackgroundColorGreen:(float) green;
 -(void)setBackgroundColorBlue:(float) blue;
--(void)drawRect:(NSRect) bounds;
+-(void)setSensitivity:(float) sensitivity;
+-(void)setScrollSensitivity:(float) sensitivity;
+-(void)setExponentialZoom:(bool) enabled;
 
 @end

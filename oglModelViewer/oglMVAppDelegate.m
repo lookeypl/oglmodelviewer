@@ -77,6 +77,32 @@
     [self.oglView setExponentialZoom: (bool)self.exponentialSwitchButton.state];
 }
 
+-(IBAction)openOBJFile:(id) sender
+{
+    NSOpenPanel* openDialog = [NSOpenPanel openPanel];
+
+    [openDialog setCanChooseFiles: true];
+    [openDialog setCanChooseDirectories: false];
+    [openDialog setAllowsMultipleSelection: false];
+
+    if ([openDialog runModal] == NSOKButton)
+    {
+        NSString* filePath = [[openDialog URLs] objectAtIndex: 0];
+        NSLog(@"File opened: %@", filePath);
+
+        if (![self.oglView openOBJFile: filePath])
+        {
+            NSLog(@"Failed to open OBJ file.");
+            NSAlert* alert = [[NSAlert alloc] init];
+            [alert addButtonWithTitle: @"OK"];
+            [alert setMessageText: @"Failed to open OBJ file."];
+            [alert runModal];
+        }
+
+        [self.oglView setNeedsDisplay: true];
+    }
+}
+
 -(NSSize)windowWillResize:(NSWindow*) sender toSize:(NSSize) frameSize
 {
     //if (sender.identifier == self.window.identifier)

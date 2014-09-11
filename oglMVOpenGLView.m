@@ -14,7 +14,7 @@
 -(void)awakeFromNib
 {
     [super awakeFromNib];
-    [[self superview] setAutoresizingMask: NSViewWidthSizable];
+    [[self superview] setAutoresizingMask: NSViewWidthSizable|NSViewHeightSizable];
 
     mCamera = [[oglMVCamera alloc] init];
     NSLog(@"oglMVOpenGLView::init: camera: %p", mCamera);
@@ -39,8 +39,6 @@
     glClearColor(mBackgroundColor[0], mBackgroundColor[1], mBackgroundColor[2], 0.0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    glColor3f(1.0f, 0.85f, 0.35f);
-
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     glLoadMatrixf(mProjectionMatrix.m);
@@ -49,13 +47,49 @@
     glLoadIdentity();
     glLoadMatrixf([mCamera getViewMatrix].m);
 
-    glBegin(GL_TRIANGLES);
+    /*glBegin(GL_TRIANGLES);
     {
+        glColor3f(1.0f, 0.85f, 0.35f);
         glVertex3f( 0.0, 0.6, 0.0);
         glVertex3f(-0.2,-0.3, 0.0);
         glVertex3f( 0.2,-0.3, 0.0);
     }
-    glEnd();
+    glEnd();*/
+
+    if (mModel)
+    {
+        for (unsigned long i=0; i<[mModel getMeshCount]; ++i)
+        {
+            if ([mModel getVertexBufferFromMesh:i])
+            {
+                // vertex buffer created, render regularly
+                glEnableClientState(GL_VERTEX_ARRAY);
+
+                glBindBuffer(GL_ARRAY_BUFFER, [mModel getVertexBufferFromMesh:i]);
+                glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, [mModel getVertexBufferFromMesh:i]);
+                glDrawArrays(GL_POINTS, 0, 1);
+                glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+                glBindBuffer(GL_ARRAY_BUFFER, 0);
+                glDisableClientState(GL_VERTEX_ARRAY);
+            }
+            else
+            {
+                // there is no vertex buffer - fall back to classic rendering
+                float* vertPtr = [mModel getVertexPtrFromMesh:i];
+                int* facePtr = [mModel getFacePtrFromMesh:i];
+
+                glBegin(GL_TRIANGLES);
+                glColor3f(1.0f, 0.85f, 0.35f);
+                for(unsigned int j=0; j<[mModel getFaceCountFromMesh:i]*3; j+=3)
+                {
+                    glVertex3f(vertPtr[(facePtr[j]-1)*3], vertPtr[((facePtr[j]-1)*3)+1], vertPtr[((facePtr[j]-1)*3)+2]);
+                    glVertex3f(vertPtr[(facePtr[j+1]-1)*3], vertPtr[((facePtr[j+1]-1)*3)+1], vertPtr[((facePtr[j+1]-1)*3)+2]);
+                    glVertex3f(vertPtr[(facePtr[j+2]-1)*3], vertPtr[((facePtr[j+2]-1)*3)+1], vertPtr[((facePtr[j+2]-1)*3)+2]);
+                }
+                glEnd();
+            }
+        }
+    }
 
     glFlush();
 }
@@ -70,6 +104,13 @@
 }
 
 // additional externally visible methods
+-(bool)openOBJFile:(NSString*) path
+{
+    mModel = [[oglMVModel alloc] init];
+
+    return [self->mModel parseModel: path];
+}
+
 -(void)setBackgroundColorRed:(float) red
 {
     mBackgroundColor[0] = red;

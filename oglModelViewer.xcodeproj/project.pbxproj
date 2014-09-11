@@ -19,6 +19,8 @@
 		B232EB2F19561C720047D54F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B232EB2D19561C720047D54F /* InfoPlist.strings */; };
 		B232EB3119561C720047D54F /* oglModelViewerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B232EB3019561C720047D54F /* oglModelViewerTests.m */; };
 		B28ABC761956BC6700D67075 /* oglMVOpenGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = B28ABC751956BC6700D67075 /* oglMVOpenGLView.m */; };
+		B2DC076719C1227E00C3F748 /* oglMVMesh.m in Sources */ = {isa = PBXBuildFile; fileRef = B2DC076619C1227E00C3F748 /* oglMVMesh.m */; };
+		B2DC076A19C1228C00C3F748 /* oglMVModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B2DC076919C1228C00C3F748 /* oglMVModel.m */; };
 		B2EB6E8F19BFD08000E9C203 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2EB6E8E19BFD08000E9C203 /* GLKit.framework */; };
 		B2F83A1819B4F60B001CF4D2 /* oglMVCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F83A1719B4F60B001CF4D2 /* oglMVCamera.m */; };
 /* End PBXBuildFile section */
@@ -55,6 +57,10 @@
 		B232EB3019561C720047D54F /* oglModelViewerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = oglModelViewerTests.m; sourceTree = "<group>"; };
 		B28ABC741956BC6700D67075 /* oglMVOpenGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = oglMVOpenGLView.h; sourceTree = "<group>"; };
 		B28ABC751956BC6700D67075 /* oglMVOpenGLView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = oglMVOpenGLView.m; sourceTree = "<group>"; };
+		B2DC076519C1227E00C3F748 /* oglMVMesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = oglMVMesh.h; sourceTree = "<group>"; };
+		B2DC076619C1227E00C3F748 /* oglMVMesh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = oglMVMesh.m; sourceTree = "<group>"; };
+		B2DC076819C1228C00C3F748 /* oglMVModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = oglMVModel.h; sourceTree = "<group>"; };
+		B2DC076919C1228C00C3F748 /* oglMVModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = oglMVModel.m; sourceTree = "<group>"; };
 		B2EB6E8C19BFAE6C00E9C203 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		B2EB6E8E19BFD08000E9C203 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		B2F83A1619B4F60B001CF4D2 /* oglMVCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = oglMVCamera.h; sourceTree = "<group>"; };
@@ -86,6 +92,10 @@
 		B232EAFA19561C720047D54F = {
 			isa = PBXGroup;
 			children = (
+				B2DC076819C1228C00C3F748 /* oglMVModel.h */,
+				B2DC076919C1228C00C3F748 /* oglMVModel.m */,
+				B2DC076519C1227E00C3F748 /* oglMVMesh.h */,
+				B2DC076619C1227E00C3F748 /* oglMVMesh.m */,
 				B2F83A1619B4F60B001CF4D2 /* oglMVCamera.h */,
 				B2F83A1719B4F60B001CF4D2 /* oglMVCamera.m */,
 				B28ABC741956BC6700D67075 /* oglMVOpenGLView.h */,
@@ -272,6 +282,8 @@
 				B232EB1A19561C720047D54F /* oglMVAppDelegate.m in Sources */,
 				B232EB1319561C720047D54F /* main.m in Sources */,
 				B2F83A1819B4F60B001CF4D2 /* oglMVCamera.m in Sources */,
+				B2DC076A19C1228C00C3F748 /* oglMVModel.m in Sources */,
+				B2DC076719C1227E00C3F748 /* oglMVMesh.m in Sources */,
 				B28ABC761956BC6700D67075 /* oglMVOpenGLView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

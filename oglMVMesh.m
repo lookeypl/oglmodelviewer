@@ -29,6 +29,11 @@
     return self.init;
 }
 
+-(NSString*)getName
+{
+    return mMeshName;
+}
+
 -(unsigned int)getVBID
 {
     return mVBID;
@@ -91,8 +96,7 @@
     for (unsigned long i=0; i<vertCount; i+=3)
         NSLog(@"Vertex - X: %f Y: %f Z: %f", mVertPtr[i], mVertPtr[i+1], mVertPtr[i+2]);
 
-    glBufferData(GL_ARRAY_BUFFER, sizeof(float)*vertCount, nil, GL_STATIC_DRAW);
-    glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(float)*vertCount, mVertPtr);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(float)*vertCount, mVertPtr, GL_STATIC_DRAW);
     glVertexPointer(3, GL_FLOAT, 0, 0);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
@@ -106,17 +110,20 @@
     {
         // correction for relative vertex numbers
         if (mFacePtr[i] < 0)
+        {
             mFacePtr[i] += mVertexCount;
-
-        mFacePtr[i] = (int)[[mFaces objectAtIndex:i] integerValue];
+            mFacePtr[i] = (int)[[mFaces objectAtIndex:i] integerValue];
+        }
+        else
+        {
+            mFacePtr[i] = (int)[[mFaces objectAtIndex:i] integerValue]-1;
+        }
     }
 
     for (unsigned long i=0; i<faceCount; i+=3)
         NSLog(@"Face - X: %d Y: %d Z: %d", mFacePtr[i], mFacePtr[i+1], mFacePtr[i+2]);
 
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(int)*faceCount, nil, GL_STATIC_DRAW);
-    glBufferSubData(GL_ELEMENT_ARRAY_BUFFER, 0, sizeof(int)*faceCount, mFacePtr);
-    glVertexPointer(3, GL_FLOAT, 0, 0);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(int)*faceCount, mFacePtr, GL_STATIC_DRAW);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
 

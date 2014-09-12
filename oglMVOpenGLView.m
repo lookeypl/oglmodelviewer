@@ -47,15 +47,6 @@
     glLoadIdentity();
     glLoadMatrixf([mCamera getViewMatrix].m);
 
-    /*glBegin(GL_TRIANGLES);
-    {
-        glColor3f(1.0f, 0.85f, 0.35f);
-        glVertex3f( 0.0, 0.6, 0.0);
-        glVertex3f(-0.2,-0.3, 0.0);
-        glVertex3f( 0.2,-0.3, 0.0);
-    }
-    glEnd();*/
-
     if (mModel)
     {
         for (unsigned long i=0; i<[mModel getMeshCount]; ++i)
@@ -64,10 +55,9 @@
             {
                 // vertex buffer created, render regularly
                 glEnableClientState(GL_VERTEX_ARRAY);
-
                 glBindBuffer(GL_ARRAY_BUFFER, [mModel getVertexBufferFromMesh:i]);
-                glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, [mModel getVertexBufferFromMesh:i]);
-                glDrawArrays(GL_POINTS, 0, 1);
+                glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, [mModel getFaceBufferFromMesh:i]);
+                glDrawElements(GL_TRIANGLES, [mModel getFaceCountFromMesh:i], GL_UNSIGNED_INT, 0);
                 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
                 glBindBuffer(GL_ARRAY_BUFFER, 0);
                 glDisableClientState(GL_VERTEX_ARRAY);
@@ -75,11 +65,12 @@
             else
             {
                 // there is no vertex buffer - fall back to classic rendering
+                NSLog(@"Vertex buffer not allocated - falling back to fixed function rendering");
                 float* vertPtr = [mModel getVertexPtrFromMesh:i];
                 int* facePtr = [mModel getFacePtrFromMesh:i];
 
                 glBegin(GL_TRIANGLES);
-                glColor3f(1.0f, 0.85f, 0.35f);
+                glColor3f(1.0f, 1.0f, 1.0f);
                 for(unsigned int j=0; j<[mModel getFaceCountFromMesh:i]*3; j+=3)
                 {
                     glVertex3f(vertPtr[(facePtr[j]-1)*3], vertPtr[((facePtr[j]-1)*3)+1], vertPtr[((facePtr[j]-1)*3)+2]);
@@ -100,6 +91,10 @@
     mWindowWidth = viewSize.width;
     mWindowHeight = viewSize.height;
 
+    NSLog(@"width: %f height: %f", mWindowWidth, mWindowHeight);
+
+    NSRect rect = NSMakeRect(0.0, 0.0, mWindowWidth, mWindowHeight);
+    [self setFrame: rect];
     mProjectionMatrix = GLKMatrix4MakePerspective(45.0f, mWindowWidth/mWindowHeight, 0.1f, 1000.0f);
 }
 

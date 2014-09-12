@@ -28,6 +28,7 @@
 -(oglMVMesh*)init;
 -(oglMVMesh*)initWithName:(NSString*) name;
 -(void)dealloc;
+-(NSString*)getName;
 -(unsigned int)getVBID;
 -(float*)getVertPtr;
 -(unsigned int)getVertexCount;

@@ -97,6 +97,13 @@
 
 
 
+-(NSString*)getNameFromMesh:(unsigned long) mesh
+{
+    return [[mMeshArray objectAtIndex: mesh] getName];
+}
+
+
+
 -(unsigned int)getVertexBufferFromMesh:(unsigned long) mesh
 {
     return [[mMeshArray objectAtIndex: mesh] getVBID];

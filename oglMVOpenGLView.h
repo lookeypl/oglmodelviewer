@@ -24,6 +24,10 @@
 
     // model file
     oglMVModel* mModel;
+
+    // flags
+    bool mGridEnabled;
+    bool mArrowsEnabled;
 }
 
 -(bool)openOBJFile:(NSString*) path;
@@ -34,5 +38,7 @@
 -(void)setSensitivity:(float) sensitivity;
 -(void)setScrollSensitivity:(float) sensitivity;
 -(void)setExponentialZoom:(bool) enabled;
+-(void)setGridEnabled:(bool) enabled;
+-(void)setArrowsEnabled:(bool) enabled;
 
 @end

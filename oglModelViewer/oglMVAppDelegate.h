@@ -27,6 +27,9 @@
 @property (assign) IBOutlet NSSlider* scrollSensitivitySlider;
 @property (assign) IBOutlet NSButton* exponentialSwitchButton;
 
+@property (assign) IBOutlet NSMenuItem* gridMenuItem;
+@property (assign) IBOutlet NSMenuItem* arrowsMenuItem;
+
 -(IBAction)redSliderMoved:(id) sender;
 -(IBAction)greenSliderMoved:(id) sender;
 -(IBAction)blueSliderMoved:(id) sender;
@@ -34,6 +37,9 @@
 -(IBAction)sensitivitySliderMoved:(id) sender;
 -(IBAction)scrollSensitivitySliderMoved:(id) sender;
 -(IBAction)exponentialScrollSwitched:(id) sender;
+
+-(IBAction)gridMenuItemSwitched:(id) sender;
+-(IBAction)arrowsMenuItemSwitched:(id) sender;
 
 -(IBAction)openOBJFile:(id) sender;
 

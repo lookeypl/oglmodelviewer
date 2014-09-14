@@ -20,6 +20,9 @@
     [self.oglView setSensitivity: movedValue];
     movedValue = [self.scrollSensitivitySlider floatValue] / 500.0f;
     [self.oglView setScrollSensitivity: movedValue];
+
+    [self.oglView setGridEnabled: (bool)self.gridMenuItem.state];
+    [self.oglView setArrowsEnabled: (bool)self.arrowsMenuItem.state];
 }
 
 -(IBAction)redSliderMoved:(id) sender;
@@ -75,6 +78,26 @@
 -(IBAction)exponentialScrollSwitched:(id) sender
 {
     [self.oglView setExponentialZoom: (bool)self.exponentialSwitchButton.state];
+}
+
+-(IBAction)gridMenuItemSwitched:(id) sender
+{
+    if (self.gridMenuItem.state)
+        [self.gridMenuItem setState:NSOffState];
+    else
+        [self.gridMenuItem setState:NSOnState];
+
+    [self.oglView setGridEnabled: (bool)self.gridMenuItem.state];
+}
+
+-(IBAction)arrowsMenuItemSwitched:(id) sender
+{
+    if (self.arrowsMenuItem.state)
+        [self.arrowsMenuItem setState:NSOffState];
+    else
+        [self.arrowsMenuItem setState:NSOnState];
+
+    [self.oglView setArrowsEnabled: (bool)self.arrowsMenuItem.state];
 }
 
 -(IBAction)openOBJFile:(id) sender

@@ -14,8 +14,6 @@
 {
     mConfig = [[oglMVConfig alloc] init];
 
-    NSLog(@"mConfig: %p", mConfig);
-
     // load data from config
     if (![mConfig readConfig])
     {
@@ -182,14 +180,6 @@
 
         [self.oglView setNeedsDisplay: true];
     }
-}
-
--(NSSize)windowWillResize:(NSWindow*) sender toSize:(NSSize) frameSize
-{
-    //if (sender.identifier == self.window.identifier)
-        //[self.oglView setViewSize: frameSize];
-
-    return frameSize;
 }
 
 @end

@@ -17,7 +17,6 @@
     [[self superview] setAutoresizingMask: NSViewWidthSizable|NSViewHeightSizable];
 
     mCamera = [[oglMVCamera alloc] init];
-    NSLog(@"oglMVOpenGLView::init: camera: %p", mCamera);
     for(int i=0; i<3; ++i)
         mBackgroundColor[i] = 0.0f;
 }
@@ -50,7 +49,6 @@
     // grid drawing
     if (mGridEnabled)
     {
-        NSLog(@"Rendering grid");
         glColor3f(0.5f, 0.5f, 0.5f);
         glBegin(GL_LINES);
 
@@ -72,7 +70,6 @@
     // arrow drawing
     if (mArrowsEnabled)
     {
-        NSLog(@"Rendering arrows");
         glBegin(GL_LINES);
 
         // red arrow - X axis
@@ -197,14 +194,12 @@
 
 -(void)setGridEnabled:(bool) enabled
 {
-    NSLog(@"grid enabled: %i", enabled);
     mGridEnabled = enabled;
     [self setNeedsDisplay: true];
 }
 
 -(void)setArrowsEnabled:(bool) enabled
 {
-    NSLog(@"arrows enabled: %i", enabled);
     mArrowsEnabled = enabled;
     [self setNeedsDisplay: true];
 }

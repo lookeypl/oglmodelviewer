@@ -36,8 +36,6 @@
 // and builds viewMatrix to use in OpenGL transformations
 -(void)update:(float) deltaX and: (float) deltaY;
 {
-    NSLog(@"oglMVCamera::update: DeltaX: %.1f, DeltaY: %.1f", deltaX, deltaY);
-
     // save current distance to center for further use
     float distToCenter = GLKVector4Length(mPos);
 

@@ -16,7 +16,6 @@
     // first round of pre parsing - calculate available groups
     for (NSString* line in fileLines)
     {
-        //NSLog(@"Line: %@", line);
         NSArray* tokens = [line componentsSeparatedByString:@" "];
 
         // search for group
@@ -35,8 +34,6 @@
         // search for vertices info (begins with "v")
         if ([[tokens objectAtIndex: 0] isEqual: @"v"])
         {
-            //NSLog(@"Found vert");
-
             // add new mesh (which will represent one group)
             [[mMeshArray objectAtIndex: mMeshCount-1] addVertex:
                    [[tokens objectAtIndex: 1] floatValue] yCoord:
@@ -48,8 +45,6 @@
         // search for index info (begins with "f")
         if ([[tokens objectAtIndex: 0] isEqual: @"f"])
         {
-            //NSLog(@"Found face %@", [tokens objectAtIndex: 1]);
-
             // add new mesh (which will represent one group)
             [[mMeshArray objectAtIndex: mMeshCount-1] addFace:
                      [[tokens objectAtIndex: 1] integerValue] bVert:

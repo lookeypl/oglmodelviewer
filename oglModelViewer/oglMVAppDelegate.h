@@ -8,8 +8,12 @@
 
 #import <Cocoa/Cocoa.h>
 #import "oglMVOpenGLView.h"
+#import "oglMVConfig.h"
 
 @interface oglMVAppDelegate : NSObject <NSApplicationDelegate>
+{
+    oglMVConfig* mConfig;
+}
 
 @property (assign) IBOutlet NSWindow* window;
 @property (assign) IBOutlet oglMVOpenGLView* oglView;

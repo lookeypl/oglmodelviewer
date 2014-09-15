@@ -18,6 +18,8 @@
 		B232EB2719561C720047D54F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B232EB0619561C720047D54F /* Cocoa.framework */; };
 		B232EB2F19561C720047D54F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B232EB2D19561C720047D54F /* InfoPlist.strings */; };
 		B232EB3119561C720047D54F /* oglModelViewerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B232EB3019561C720047D54F /* oglModelViewerTests.m */; };
+		B233960B19C6643300F6BD7D /* oglMVConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = B233960A19C6643300F6BD7D /* oglMVConfig.m */; };
+		B233960D19C6665400F6BD7D /* config.plist in Resources */ = {isa = PBXBuildFile; fileRef = B233960C19C6665400F6BD7D /* config.plist */; };
 		B28ABC761956BC6700D67075 /* oglMVOpenGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = B28ABC751956BC6700D67075 /* oglMVOpenGLView.m */; };
 		B2DC076719C1227E00C3F748 /* oglMVMesh.m in Sources */ = {isa = PBXBuildFile; fileRef = B2DC076619C1227E00C3F748 /* oglMVMesh.m */; };
 		B2DC076A19C1228C00C3F748 /* oglMVModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B2DC076919C1228C00C3F748 /* oglMVModel.m */; };
@@ -55,6 +57,9 @@
 		B232EB2C19561C720047D54F /* oglModelViewerTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "oglModelViewerTests-Info.plist"; sourceTree = "<group>"; };
 		B232EB2E19561C720047D54F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		B232EB3019561C720047D54F /* oglModelViewerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = oglModelViewerTests.m; sourceTree = "<group>"; };
+		B233960919C6643300F6BD7D /* oglMVConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = oglMVConfig.h; sourceTree = "<group>"; };
+		B233960A19C6643300F6BD7D /* oglMVConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = oglMVConfig.m; sourceTree = "<group>"; };
+		B233960C19C6665400F6BD7D /* config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = config.plist; sourceTree = "<group>"; };
 		B28ABC741956BC6700D67075 /* oglMVOpenGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = oglMVOpenGLView.h; sourceTree = "<group>"; };
 		B28ABC751956BC6700D67075 /* oglMVOpenGLView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = oglMVOpenGLView.m; sourceTree = "<group>"; };
 		B2DC076519C1227E00C3F748 /* oglMVMesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = oglMVMesh.h; sourceTree = "<group>"; };
@@ -92,6 +97,9 @@
 		B232EAFA19561C720047D54F = {
 			isa = PBXGroup;
 			children = (
+				B233960C19C6665400F6BD7D /* config.plist */,
+				B233960919C6643300F6BD7D /* oglMVConfig.h */,
+				B233960A19C6643300F6BD7D /* oglMVConfig.m */,
 				B2DC076819C1228C00C3F748 /* oglMVModel.h */,
 				B2DC076919C1228C00C3F748 /* oglMVModel.m */,
 				B2DC076519C1227E00C3F748 /* oglMVMesh.h */,
@@ -261,6 +269,7 @@
 				B232EB1F19561C720047D54F /* Images.xcassets in Resources */,
 				B232EB1719561C720047D54F /* Credits.rtf in Resources */,
 				B232EB1D19561C720047D54F /* MainMenu.xib in Resources */,
+				B233960D19C6665400F6BD7D /* config.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -280,6 +289,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B232EB1A19561C720047D54F /* oglMVAppDelegate.m in Sources */,
+				B233960B19C6643300F6BD7D /* oglMVConfig.m in Sources */,
 				B232EB1319561C720047D54F /* main.m in Sources */,
 				B2F83A1819B4F60B001CF4D2 /* oglMVCamera.m in Sources */,
 				B2DC076A19C1228C00C3F748 /* oglMVModel.m in Sources */,

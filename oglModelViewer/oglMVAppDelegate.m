@@ -12,24 +12,84 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
+    mConfig = [[oglMVConfig alloc] init];
+
+    NSLog(@"mConfig: %p", mConfig);
+
+    // load data from config
+    if (![mConfig readConfig])
+    {
+        NSLog(@"Failed to read config. Falling back to default values.");
+        // default values are kept in MainMenu.xib, we just have to read them
+        // nothing to do here
+    }
+    else
+    {
+        // config read successfully, apply settings to all controls
+        [self.redColorSlider setFloatValue: mConfig->mBackgroundColorRed];
+        [self.greenColorSlider setFloatValue: mConfig->mBackgroundColorGreen];
+        [self.blueColorSlider setFloatValue: mConfig->mBackgroundColorBlue];
+
+        NSInteger expSwitchState = mConfig->mMouseExponentialScroll ? 1 : 0;
+        [self.exponentialSwitchButton setState: expSwitchState];
+        [self.sensitivitySlider setFloatValue: mConfig->mMouseSensitivity];
+        [self.scrollSensitivitySlider setFloatValue: mConfig->mMouseScrollSensitivity];
+
+        NSInteger gridSwitchState = mConfig->mGridEnabled ? 1 : 0;
+        NSInteger arrowSwitchState = mConfig->mXYZArrowsEnabled ? 1 : 0;
+        [self.gridMenuItem setState: gridSwitchState];
+        [self.arrowsMenuItem setState: arrowSwitchState];
+    }
+
+    // set required values and variables in sliders and inside oglView
+    float movedValue = [self.redColorSlider floatValue] / 255.0f;
+    [self.oglView setBackgroundColorRed: movedValue];
     [self.redTextLabel setStringValue:[self.redColorSlider stringValue]];
+
+    movedValue = [self.greenColorSlider floatValue] / 255.0f;
+    [self.oglView setBackgroundColorGreen: movedValue];
     [self.greenTextLabel setStringValue:[self.greenColorSlider stringValue]];
+
+    movedValue = [self.blueColorSlider floatValue] / 255.0f;
+    [self.oglView setBackgroundColorBlue: movedValue];
     [self.blueTextLabel setStringValue:[self.blueColorSlider stringValue]];
 
-    float movedValue = [self.sensitivitySlider floatValue] / 1000.0f;
+    movedValue = [self.sensitivitySlider floatValue] / 1000.0f;
     [self.oglView setSensitivity: movedValue];
     movedValue = [self.scrollSensitivitySlider floatValue] / 500.0f;
     [self.oglView setScrollSensitivity: movedValue];
 
     [self.oglView setGridEnabled: (bool)self.gridMenuItem.state];
     [self.oglView setArrowsEnabled: (bool)self.arrowsMenuItem.state];
+    [self.oglView setNeedsDisplay: true];
+}
+
+-(void)applicationWillTerminate:(NSNotification *)notification
+{
+    // get current values from all controls and transfer them to mConfig
+    if (mConfig)
+    {
+        mConfig->mMouseSensitivity = [self.sensitivitySlider floatValue];
+        mConfig->mMouseScrollSensitivity = [self.scrollSensitivitySlider floatValue];
+        mConfig->mMouseExponentialScroll = (bool)self.exponentialSwitchButton.state;
+
+        mConfig->mBackgroundColorRed = [self.redColorSlider floatValue];
+        mConfig->mBackgroundColorGreen = [self.greenColorSlider floatValue];
+        mConfig->mBackgroundColorBlue = [self.blueColorSlider floatValue];
+
+        mConfig->mGridEnabled = self.gridMenuItem.state;
+        mConfig->mXYZArrowsEnabled = self.arrowsMenuItem.state;
+
+        // commence config save
+        if (![mConfig saveConfig])
+            NSLog(@"Failed to save config");
+    }
 }
 
 -(IBAction)redSliderMoved:(id) sender;
 {
     // "normalize" values to 0.0f...1.0f
     float movedValue = [sender floatValue] / 255.0f;
-    NSLog(@"moved red: %f", movedValue);
     [self.oglView setBackgroundColorRed: movedValue];
     [self.oglView setNeedsDisplay: true];
 
@@ -41,7 +101,6 @@
 {
     // "normalize" values to 0.0f...1.0f
     float movedValue = [sender floatValue] / 255.0f;
-    NSLog(@"moved green: %f", movedValue);
     [self.oglView setBackgroundColorGreen: movedValue];
     [self.oglView setNeedsDisplay: true];
 
@@ -53,7 +112,6 @@
 {
     // "normalize" values to 0.0f...1.0f
     float movedValue = [sender floatValue] / 255.0f;
-    NSLog(@"moved blue: %f", movedValue);
     [self.oglView setBackgroundColorBlue: movedValue];
     [self.oglView setNeedsDisplay: true];
 

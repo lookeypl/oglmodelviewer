@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>BackgroundColor</key>
+	<dict>
+		<key>Red</key>
+		<integer>23</integer>
+		<key>Green</key>
+		<integer>100</integer>
+		<key>Blue</key>
+		<integer>200</integer>
+	</dict>
+	<key>GridEnabled</key>
+	<true/>
+	<key>XYZArrowsEnabled</key>
+	<true/>
+	<key>MouseSensitivity</key>
+	<real>30</real>
+	<key>MouseScrollSensitivity</key>
+	<integer>15</integer>
+	<key>ExponentialScrollEnabled</key>
+	<true/>
+</dict>
+</plist>
